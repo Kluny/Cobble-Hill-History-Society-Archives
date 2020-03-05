@@ -1,0 +1,116 @@
+.template-mochi article {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.controls, .search {
+    margin-top: 20px;
+}
+
+
+.img-container, .img-container a {
+    height: 120px;
+    width: 120px;
+}
+
+.img-container a img {
+    object-fit: contain;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+
+.image-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.input-row {
+    margin-bottom: 5px;
+}
+
+
+.input-row label, .input-row input {
+    display: inline;
+
+}
+
+.input-row label {
+    width: auto;
+}
+
+.input-row input {
+    width: 150px;
+    padding: 2px;
+}
+
+#Donor {
+    width: 280px;
+}
+
+
+.input-row textarea {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.top-row {
+    vertical-align: bottom;
+}
+
+.top-row .input-textarea {
+    height: 100%;
+    float: left;
+    width: 80%;
+}
+.top-row .save {
+    float: left;
+    height: auto;
+    line-height: 2em;
+    margin: 1.5em;
+}
+
+.save {
+    background-color: green;
+    border: green;
+}
+
+.save:hover {
+    opacity: 1!important;
+    transition: 0.5s;
+}
+
+
+.disable-input-row input {
+    height: 1.7em;
+    padding: 2px;
+
+    -webkit-touch-callout: initial; /* iOS Safari */
+    -webkit-user-select: text; /* Safari */
+    -khtml-user-select: text; /* Konqueror HTML */
+    -moz-user-select: text; /* Firefox */
+    -ms-user-select: text; /* Internet Explorer/Edge */
+    user-select: text ;
+    /* Non-prefixed version, currently supported */
+}
+
+
+.image-col img {
+    max-height: 600px;
+    max-width: 600px;
+}
+
+
+
+.expanded {
+    max-height: 900px!important;
+    max-width: 900px!important;
+}
+
+.thumbnail {
+
+}
+
+small {
+    font-size: 0.7em;
+}
