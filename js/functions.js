@@ -15,10 +15,22 @@ jQuery(function() {
     // input_1_3 refers to the donor field.
     jQuery("#input_1_3").val(localStorage.getItem("Donor"));
 
+
+    // todo: uncomment and test.
+/*    jQuery(".repeat").each( function() {
+        val(localStorage.getItem(jQuery(this).name()))
+    }); */
+
     // if donor field is changed, add it to cookie
     jQuery("#input_1_3").on('change', function() {
         localStorage.setItem('Donor', jQuery(this).val());
     });
+
+/*    jQuery(".repeat").on('change', function() {
+        localStorage.setItem(jQuery(this).name(), jQuery(this).val());
+    });
+
+    */
 
 });
 

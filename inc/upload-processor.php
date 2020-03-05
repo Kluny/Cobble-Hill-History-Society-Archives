@@ -23,21 +23,16 @@
 		// This should be the name of the file that is uploaded to dreamhost, with the original extension, but that's not possible as the dreamhost upload has already occurred at this point.
 		public $cloud_file_name;
 
-		public $columns = array(
-			'Description' => '',
-			'Donor'       => '',
-			'CloudFile'   => '',
-			'Size'        => '',
-			'Pixels'      => '',
-			'DPI'         => '',
-			'FileDate'    => '',
-			'MiniPhoto'   => '',
-			'File'        => '',
-			'FileType'    => ''
-		);
+		public $columns = array();
 
 		public function __construct( $form ) {
 			$this->form = $form;
+			$single = new Single_Record();
+
+
+			// since adding more fields, uploads don't work. Figure this out.
+			$this->columns = array( array_keys( $single->input_fields ) );
+
 		}
 
 		/**
