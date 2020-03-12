@@ -140,12 +140,7 @@
 	/** Depends on Gravity Forms. */
 	function mochi_after_submission( $entry, $form ) {
 		$processor = new Upload_Processor( $form );
-
 		$processor->process( $entry );
-
-		// get exif data
-		// put everything in
-
 	}
 
 	add_action( 'gform_after_submission_' . FORM_ID, 'mochi_after_submission', 10, 2 );

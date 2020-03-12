@@ -36,13 +36,13 @@
 
 // Bail if there is no file uploaded to the form
 			if ( empty( $entry[ FILE_UPLOAD_FIELD_ID ] ) ) {
-				return;
+				return false;
 			}
 
 			$file_url  = $entry[ FILE_UPLOAD_FIELD_ID ];
 			$file_name = ! empty( $new_file_name) ? $new_file_name : sanitize_file_name( $_FILES[ 'input_' . FILE_UPLOAD_FIELD_ID ]['name'] );
 
-			$this->upload( $file_url, $file_name );
+			return $this->upload( $file_url, $file_name );
 
 		}
 

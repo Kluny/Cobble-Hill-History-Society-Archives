@@ -29,7 +29,6 @@
 			$this->form = $form;
 			$single = new Single_Record();
 
-
 			// since adding more fields, uploads don't work. Figure this out.
 			$this->columns = array( array_keys( $single->input_fields ) );
 
@@ -52,15 +51,23 @@
 			$row_inserted   = false;
 
 			$full_path = $this->get_filepath( $entry );
+
+			// This is where we want a mutex lock
+			//LOCK TABLES PICTURES_TABLE WRITE;
 			$catno = $this->get_incremented_catno();
-
-
+			
 			// Get values ready for database.
 			foreach ( $this->form['fields'] as $k => $field ) {
-				if ( ! empty( $entry[ $field->id ] ) ) {
+				
+
+				if ( isset( $entry[ $field->id ] ) || ! empty( $entry[ $field->id ] ) ) {
+
 					$this->columns[ $field->label ] = $entry[ $field->id ];
 				}
 			}
+
+			// There shouldn't be any dang array index 0 but it keeps on sneaking through.
+			unset($this->columns[0]);
 
 			// upload a PDF and a .doc
 
@@ -74,10 +81,6 @@
 			$this->columns['FileType']  = $this->filetype( $full_path ); // mimetype
 			$this->columns['FileDate']  = date( 'Y-m-d H:i:s' );
 
-			// This is where we want a mutex lock
-			//LOCK TABLES PICTURES_TABLE WRITE;
-
-
 			$this->columns['CatNo']     = $catno;
 			$this->columns['CloudFile'] = $catno . '.' . $this->get_extension( $full_path );
 
@@ -88,12 +91,13 @@
 
 			// Check if a file was uploaded, and process it if so.
 			if ( ! empty( $entry[ $this->file_upload_field ] ) ) {
+
 				$uploader = new Dreamhost_Client();
-				$uploader->process( $entry, $this->columns['CloudFile'] );
+				$uploaded = $uploader->process( $entry, $this->columns['CloudFile'] );
 				$processed_file = $this->process_file_upload( $entry, $catno );
 
 			}
-
+			
 			// Discard the uploaded file once it's all dealt with.
 			// Only write to the database if the image was saved.
 			if ( $processed_file ) {
@@ -226,6 +230,8 @@
 			$args = '';
 			global $wpdb;
 
+			
+			echo "<pre>" . print_r( $this->columns, true ) . "</pre>";
 
 			foreach ( $this->columns as $column => $value ) {
 				$cols .= '`' . $column . '`, ';
@@ -293,6 +299,7 @@
 				// check whether file is larger than 900x900 here, and just pass if it's not.
 				if ( 900 < $this->pixels( $full_path, 'height' ) && 900 < $this->pixels( $full_path, 'width' ) ) {
 					$this->save_document( $full_path, $new_file_name );
+					$file_processed = true;
 				} else {
 					$file_processed = call_user_func_array( array( $this, 'resize_' . $filetype ), array(
 						$full_path,

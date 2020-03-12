@@ -82,7 +82,7 @@
 				'description' => 'Details about how this file must be handled..',
 				'placeholder' => '',
 				'value'       => '',
-				'type'        => 'hidden',
+				'type'        => 'text',
 				'disabled'    => true,
 			),
 			'InformationSource'   => array(
@@ -91,7 +91,7 @@
 				'description' => '',
 				'placeholder' => '',
 				'value'       => '',
-				'type'        => 'hidden',
+				'type'        => 'text',
 				'disabled'    => true,
 			),
 			'UploaderIdentity'   => array(
@@ -100,7 +100,7 @@
 				'description' => 'The person who added this file to the database.',
 				'placeholder' => '',
 				'value'       => '',
-				'type'        => 'hidden',
+				'type'        => 'text',
 				'disabled'    => true,
 			),
 			'Public'   => array(
@@ -109,7 +109,7 @@
 				'description' => '',
 				'placeholder' => '',
 				'value'       => '',
-				'type'        => 'hidden',
+				'type'        => 'checkbox',
 				'disabled'    => true,
 			),
 			'Copyright'   => array(
@@ -118,7 +118,7 @@
 				'description' => '',
 				'placeholder' => '',
 				'value'       => '',
-				'type'        => 'hidden',
+				'type'        => 'checkbox',
 				'disabled'    => true,
 			),
 			'Administration'   => array(
@@ -127,7 +127,7 @@
 				'description' => '',
 				'placeholder' => '',
 				'value'       => '',
-				'type'        => 'hidden',
+				'type'        => 'checkbox',
 				'disabled'    => true,
 			),
 		);

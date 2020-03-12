@@ -40,6 +40,7 @@
             <div class="input-row <?php echo $disable_input_row; ?>">
                 <label for="<?php echo esc_html( $id ); ?>"><?php echo esc_html( $label ); ?></label>
                 <input type="<?php echo esc_html( $type ); ?>"
+                       <?php checked( $value); ?>
                        class="form-control"
                        size="20"
                        name="<?php echo esc_html( $id ); ?>"
