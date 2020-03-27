@@ -1,91 +1,139 @@
+form#data-form img {
+    -webkit-box-shadow: -1px 0px 18px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 0px 18px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px 0px 18px 0px rgba(0,0,0,0.75);
+    margin-top: 16px;
+}
+
+
+.entry-header h1 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.gform_wrapper {
+margin-top: 0!important;
+}
+
+.gfield_label {
+    margin-bottom: 0!important;
+}
+
+body .gform_wrapper .top_label div.ginput_container {
+    margin-top: 0!important;
+}
+
+.checkbox-repeat > label {
+float: left;
+width: 150px;
+display: inline-block;
+clear: none;
+}
+
+.checkbox-repeat > .ginput_container_radio {
+float: left;
+width: 100px;
+display: inline-block;
+margin-top: 0!important;
+}
+
+.checkbox-repeat > .ginput_container_radio ul.gfield_radio {
+margin-top: 0;
+}
+
+.checkbox-repeat > .ginput_container_radio .gfield_radio li input[type=radio] {
+margin-top: 0!important;
+}
+
 .template-mochi article {
-    padding-left: 60px;
-    padding-right: 60px;
+padding-left: 60px;
+padding-right: 60px;
 }
 
 .controls, .search {
-    margin-top: 20px;
+margin-top: 20px;
 }
 
 
 .img-container, .img-container a {
-    height: 120px;
-    width: 120px;
+height: 120px;
+width: 120px;
 }
 
 .img-container a img {
-    object-fit: contain;
-    max-width: 120px;
-    max-height: 120px;
+object-fit: contain;
+max-width: 120px;
+max-height: 120px;
 }
 
 
 .image-row {
-    padding-top: 10px;
-    padding-bottom: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
 }
 
 .input-row {
-    margin-bottom: 5px;
+margin-bottom: 5px;
 }
 
 
 .input-row label, .input-row input {
-    display: inline;
+display: inline;
 
 }
 
 .input-row label {
-    width: auto;
+width: auto;
 }
 
 .input-row input {
-    width: 150px;
-    padding: 2px;
+width: 300px;
+padding: 2px;
 }
 
 #Donor {
-    width: 280px;
+width: 280px;
 }
 
 
 .input-row textarea {
-    margin-top: 0px;
-    margin-bottom: 0px;
+margin-top: 0px;
+margin-bottom: 0px;
 }
 
 .top-row {
-    vertical-align: bottom;
+vertical-align: bottom;
 }
 
 .top-row .input-textarea {
-    height: 100%;
-    float: left;
-    width: 80%;
+height: 100%;
+float: left;
+width: 80%;
 }
 .top-row .save {
-    float: left;
-    height: auto;
-    line-height: 2em;
-    margin: 1.5em;
+float: left;
+height: auto;
+line-height: 2em;
+margin: 1.5em;
 }
 
 .save {
-    background-color: green;
-    border: green;
+background-color: green;
+border: green;
 }
 
 .save:hover {
-    opacity: 1!important;
-    transition: 0.5s;
+opacity: 1!important;
+transition: 0.5s;
 }
 
 
 .disable-input-row input {
-    height: 1.7em;
-    padding: 2px;
+height: 1.7em;
+padding: 2px;
 
-    -webkit-touch-callout: initial; /* iOS Safari */
+-webkit-touch-callout: initial; /* iOS Safari */
     -webkit-user-select: text; /* Safari */
     -khtml-user-select: text; /* Konqueror HTML */
     -moz-user-select: text; /* Firefox */

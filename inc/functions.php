@@ -27,7 +27,6 @@
 			$args = wp_parse_args( $args, $defaults );
 			extract( $args );
 
-
 			$description = ! empty( $description ) ? '<small>' . esc_html( $description ) . '</small>' : '';
 
 			$disable_input_row = '';
@@ -42,7 +41,7 @@
                 <input type="<?php echo esc_html( $type ); ?>"
                        <?php checked( $value); ?>
                        class="form-control"
-                       size="20"
+                       size="40"
                        name="<?php echo esc_html( $id ); ?>"
                        id="<?php echo esc_html( $id ); ?>"
                        aria-describedby="<?php echo esc_html( $description ); ?>"

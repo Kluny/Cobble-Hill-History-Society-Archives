@@ -15,7 +15,7 @@
 	<?php require 'pagination_arrows.php'; ?>
 </div>
 
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . "?id=" . $id; ?>">
+<form id="data-form" method="post" action="<?php echo $_SERVER['PHP_SELF'] . "?id=" . $id; ?>">
     <div class="row">
         <div class="col-md-12 top-row">
 			<?php

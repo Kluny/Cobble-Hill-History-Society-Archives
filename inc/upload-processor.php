@@ -58,9 +58,10 @@
 			
 			// Get values ready for database.
 			foreach ( $this->form['fields'] as $k => $field ) {
-				
-
 				if ( isset( $entry[ $field->id ] ) || ! empty( $entry[ $field->id ] ) ) {
+
+					$entry[ $field->id ] = ( "Yes" === $entry[ $field->id ] ) ? true : $entry[ $field->id ];
+					$entry[ $field->id ] = ( "No" === $entry[ $field->id ] ) ? false : $entry[ $field->id ];
 
 					$this->columns[ $field->label ] = $entry[ $field->id ];
 				}
@@ -77,7 +78,7 @@
 			}
 
 			$this->columns['Size']      = $this->file_size( $full_path ); // mb
-			$this->columns['Pixels']    = $this->pixels( $full_path ); // pixels high and wide
+			$this->columns['Pixels']    = $this->pixels( $full_path, false ); // pixels high and wide
 			$this->columns['FileType']  = $this->filetype( $full_path ); // mimetype
 			$this->columns['FileDate']  = date( 'Y-m-d H:i:s' );
 
@@ -108,7 +109,6 @@
 
 			// This is where we unlock the mutex
 
-			// you are here: showing a notification if everything went fine. 
 			return $row_inserted;
 		}
 
@@ -148,11 +148,11 @@
 		 * Return image size in pixels in ###x### format.
 		 *
 		 * @param $filepath
-		 * @param $dimension = false|string
+		 * @param $dimension = string
 		 *
 		 * @return int|string
 		 */
-		public function pixels( $filepath, $dimension = false ) {
+		public function pixels( $filepath, $dimension ) {
 			$dimensions = array(
 				'width'     => 0,
 				'height'    => 1,
@@ -161,12 +161,17 @@
 			);
 
 			$image_size = getimagesize( $filepath );
-			if ( $image_size ) {
-				if ( $dimension ) {
-					return $image_size[ $dimensions[ $dimension ] ];
+
+			if ( is_array( $image_size ) ) {
+
+				var_dump( $dimension );
+
+				if ( false !== $dimension ) {
+					return (int) $image_size[ $dimensions[ $dimension ] ];
 				}
 
 				return $image_size[0] . "x" . $image_size[1];
+
 			}
 
 			return 0;
@@ -216,7 +221,7 @@
 
 			$catno = intval( $catno ) + 1;
 
-			$catno = str_pad ( (string) $catno, 6, 0, STR_PAD_LEFT );
+			$catno = str_pad ( (string) $catno, 7, 0, STR_PAD_LEFT );
 
 			return $catno;
 
@@ -229,9 +234,7 @@
 			$cols = '';
 			$args = '';
 			global $wpdb;
-
-			
-			echo "<pre>" . print_r( $this->columns, true ) . "</pre>";
+			//echo "<pre>" . print_r( $this->columns, true ) . "</pre>";
 
 			foreach ( $this->columns as $column => $value ) {
 				$cols .= '`' . $column . '`, ';
@@ -293,13 +296,23 @@
 
 
 			if ( in_array( $filetype, $processable_types ) ) {
+
 				$filetype = explode( '/', $filetype );
 				$filetype = $filetype[1];
-
+				
+				
 				// check whether file is larger than 900x900 here, and just pass if it's not.
-				if ( 900 < $this->pixels( $full_path, 'height' ) && 900 < $this->pixels( $full_path, 'width' ) ) {
+
+				$height = $this->pixels( $full_path, 'height' );
+				$width = $this->pixels( $full_path, 'width' );
+
+				if ( 900 > $height && 900 > $width ) {
+
+					$ext = $this->get_extension( $full_path );
+					$file_processed = $new_file_name . '.' . $ext;
+
 					$this->save_document( $full_path, $new_file_name );
-					$file_processed = true;
+
 				} else {
 					$file_processed = call_user_func_array( array( $this, 'resize_' . $filetype ), array(
 						$full_path,
@@ -308,6 +321,10 @@
 						false,
 						$new_file_name
 					) );
+
+					if( $file_processed ) {
+						$file_processed = $new_file_name . '.jpg';
+					}
 				}
 
 			} else {
@@ -332,13 +349,15 @@
 		}
 
 		/**
-		 * // Move the file to the archive directory.
+		 * Move the file to the archive directory.
 		 *
 		 * @param $filepath
 		 */
 		public function save_document( $filepath, $new_file_name ) {
+
 			$ext = $this->get_extension( $filepath);
-			move_uploaded_file( $filepath, $this->thumbnail_directory . '/' . $new_file_name . '.' . $ext );
+			$result = rename( $filepath, $this->thumbnail_directory . '/' . $new_file_name . '.' . $ext );
+
 		}
 
 		public function get_extension( $filepath  ) {
@@ -379,7 +398,8 @@
 			imagecopyresampled( $dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height );
 
 			$ext = $this->get_extension( $file );
-			$success = imagepng( $dst, $this->thumbnail_directory . '/' . $new_file_name . '.' . $ext );
+			$ext = 'jpg';
+			$success = imagejpeg( $dst, $this->thumbnail_directory . '/' . $new_file_name . '.' . $ext );
 
 			if( $success ) {
 				return $new_file_name . '.' . $ext;

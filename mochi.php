@@ -92,7 +92,7 @@
 			'jquery',
 			'popper',
 			'bootstrap_js'
-		) );
+		), '6.0.1' );
 
 		wp_enqueue_style( 'bootstrap_css', "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", array(), '0.1.0', 'all' );
 		wp_enqueue_style( 'local_styles', MOCHI_PLUGIN_URL . 'css/style.css' );
