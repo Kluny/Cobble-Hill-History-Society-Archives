@@ -10,8 +10,8 @@
 
 		public function __construct() {
 			// Dreamhost credentials
-			define( 'AWS_KEY', 'DHDYH9N66WCVJH7QJFE4' );
-			define( 'AWS_SECRET_KEY', 'UaCq2c3VYCeMHyBETus_QJOORvmfPDEc_dm9mTwm' );
+			define( 'AWS_KEY', 'secret' );
+			define( 'AWS_SECRET_KEY', 'secret' );
 			define( 'HOST', 'https://objects-us-east-1.dream.io' );
 			define( 'REGION', 'us-east-1' );
 			// bucket and test bucket are now set in mochi.php.
